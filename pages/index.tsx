@@ -3,12 +3,17 @@ import fetch from 'isomorphic-unfetch'
 import Layout from '@components/Layout/Layout'
 import KawaiiHeader from '@components/KawaiiHeader/KawaiiHeader'
 import ProductList from '@components/ProductList/ProductList'
+import { Product, TAPIProductResponse } from '@classes/Product'
 
 export const getServerSideProps = async () => {
-  // utilizar url absolutas
-  const res = await fetch(`http://localhost:3000/api/avo`)
+  // // utilizar url absolutas
+  // const res = await fetch(`http://localhost:3000/api/avo`)
+  // //rename de data a productlisst tipo TAPIAvoResponse
+  // const { data: productList }: TAPIAvoResponse = await res.json()
+
+  const res = await fetch(`https://v3.tissini.app/api/v3/categories/1/products`)
   //rename de data a productlisst tipo TAPIAvoResponse
-  const { data: productList }: TAPIAvoResponse = await res.json()
+  const { products: productList }: TAPIProductResponse = await res.json()
 
   if (!productList) {
     return {
@@ -23,22 +28,11 @@ export const getServerSideProps = async () => {
   }
 }
 
-const HomePage = ({ productList }: { productList: TProduct[] }) => {
-  // const [productList, setProductList] = useState<TProduct[]>([])
-
-  // useEffect(() => {
-  //   window
-  //     .fetch('/api/avo')
-  //     .then((response) => response.json())
-  //     .then(({ data }: TAPIAvoResponse) => {
-  //       setProductList(data)
-  //     })
-  // }, [])
-
+const HomePage = ({ productList }: { productList: Product[] }) => {
   return (
     <Layout>
       <KawaiiHeader />
-      <ProductList products={productList} />
+      {<ProductList products={productList} />}
     </Layout>
   )
 }
