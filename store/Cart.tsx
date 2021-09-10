@@ -1,6 +1,7 @@
+import { Product } from '@classes/Product'
 import React, { Dispatch, useContext, useReducer } from 'react'
 
-export type CartItemType = TProduct & { quantity: number }
+export type CartItemType = Product & { quantity: number }
 
 export type CartState = {
   [key: string]: CartItemType
@@ -8,7 +9,7 @@ export type CartState = {
 
 export type CartAction = {
   type: 'add' | 'remove'
-  item: TProduct
+  item: Product
   quantity?: number
 }
 
@@ -115,14 +116,14 @@ export const useCart = () => {
 export const useCartMutations = () => {
   const dispatch = useContext(CartDispatchContext)
 
-  const addToCart = (product: TProduct, quantity?: number) =>
+  const addToCart = (product: Product, quantity?: number) =>
     dispatch({
       type: 'add',
       item: product,
       quantity,
     })
 
-  const removeFromCart = (product: TProduct) =>
+  const removeFromCart = (product: Product) =>
     dispatch({
       type: 'remove',
       item: product,
