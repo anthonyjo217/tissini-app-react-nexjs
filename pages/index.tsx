@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
+import { GetStaticProps } from 'next'
 import Layout from '@components/Layout/Layout'
 import KawaiiHeader from '@components/KawaiiHeader/KawaiiHeader'
 import ProductList from '@components/ProductList/ProductList'
 import { Product, TAPIProductResponse } from '@classes/Product'
 
-export const getServerSideProps = async () => {
-  // // utilizar url absolutas
-  // const res = await fetch(`http://localhost:3000/api/avo`)
-  // //rename de data a productlisst tipo TAPIAvoResponse
-  // const { data: productList }: TAPIAvoResponse = await res.json()
-
+export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch(`https://v3.tissini.app/api/v3/categories/1/products`)
-  //rename de data a productlisst tipo TAPIAvoResponse
+  //rename de data a productlisst tipo TAPIProductResponse
   const { products: productList }: TAPIProductResponse = await res.json()
-
-  if (!productList) {
-    return {
-      notFound: true,
-    }
-  }
 
   return {
     props: {

@@ -23,7 +23,6 @@ const Navbar = () => {
             Avo Store
           </Menu.Item>
         </Link>
-
         <Menu.Menu position="right">
           <Link href="/cart" passHref>
             <Menu.Item active={pathname === '/cart'}>

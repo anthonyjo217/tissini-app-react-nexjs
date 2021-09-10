@@ -50,6 +50,7 @@ interface ProductItem {
   readonly updatedAt: Date
   readonly images: ProductImages[]
   readonly variants: ProductVariant[]
+  readonly image: string
 }
 
 export type TAPIProductDetailResponse = ProductItem
@@ -71,6 +72,7 @@ export class Product implements ProductItem {
   images: ProductImages[]
   variants: ProductVariant[]
   category: ProductCategory
+  image: string
   //response: TAPIProductResponse
 
   constructor(
@@ -84,7 +86,8 @@ export class Product implements ProductItem {
     updatedAt: Date,
     images: ProductImages[],
     variants: ProductVariant[],
-    category: ProductCategory
+    category: ProductCategory,
+    image: string
     //response: TAPIProductResponse
   ) {
     this.id = id
@@ -97,15 +100,17 @@ export class Product implements ProductItem {
     this.updatedAt = updatedAt
     this.images = images
     this.variants = variants
-    this.category = category
+    ;(this.category = category), (this.image = this.getimage())
     //this.response = response
   }
+
   price: number = 0
-  get image() {
+  getimage() {
     return this.images.length > 0
       ? `https://v3.tissini.app${this.images[0].url}`
       : 'https://programacion.net/files/article/20161110041116_image-not-found.png'
   }
+
   // get prices(): string | number {
   //   const priceRange = this.variants.map((variant) => variant.price);
   //   const min = +(
