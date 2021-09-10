@@ -3,9 +3,10 @@ import { Item, Label } from 'semantic-ui-react'
 
 import AddToCart from './AddToCart'
 import ProductAttributes from './ProductAttributes'
+import { Product } from '@classes/Product'
 
 type ProductSummaryProps = {
-  product: TProduct
+  product: Product
 }
 
 const ProductSummary = ({ product }: ProductSummaryProps) => (
@@ -19,7 +20,7 @@ const ProductSummary = ({ product }: ProductSummaryProps) => (
           <Item.Header as="h1">{product.name}</Item.Header>
           <Item.Description>
             <p>{product.price}</p>
-            <Label>{`SKU: ${product.sku}`}</Label>
+            <Label>{`Ref: ${product.reference}`}</Label>
           </Item.Description>
           <Item.Extra>
             <AddToCart product={product} />
@@ -27,7 +28,7 @@ const ProductSummary = ({ product }: ProductSummaryProps) => (
         </Item.Content>
       </Item>
     </Item.Group>
-    <ProductAttributes {...product.attributes} />
+    {/* <ProductAttributes  {...product.variants} /> */}
   </>
 )
 

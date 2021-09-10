@@ -1,13 +1,18 @@
 import React from 'react'
 import { Header, Divider, Table } from 'semantic-ui-react'
+import { Product } from '@classes/Product'
 
 const ProductAttributes = ({
-  description,
+  tags,
+  images,
+  category,
+  createdAt,
+  updatedAt,
   ...otherAttributes
-}: TProductAttributes) => (
+}: Product) => (
   <section className="container">
     <Header as="h3">About this avocado</Header>
-    <p>{description}</p>
+    <p>{tags}</p>
 
     <Divider />
 

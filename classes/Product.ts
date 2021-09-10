@@ -71,7 +71,7 @@ export class Product implements ProductItem {
   images: ProductImages[]
   variants: ProductVariant[]
   category: ProductCategory
-  response: TAPIProductResponse
+  //response: TAPIProductResponse
 
   constructor(
     id: number,
@@ -84,8 +84,8 @@ export class Product implements ProductItem {
     updatedAt: Date,
     images: ProductImages[],
     variants: ProductVariant[],
-    category: ProductCategory,
-    response: TAPIProductResponse
+    category: ProductCategory
+    //response: TAPIProductResponse
   ) {
     this.id = id
     this.name = name
@@ -98,7 +98,7 @@ export class Product implements ProductItem {
     this.images = images
     this.variants = variants
     this.category = category
-    this.response = response
+    //this.response = response
   }
   price: number = 0
   get image() {

@@ -2,10 +2,11 @@ import React from 'react'
 import Link from 'next/link'
 import { Item, Button, Loader, Message } from 'semantic-ui-react'
 import { CartItemType } from '@store/Cart'
+import { Product } from '@classes/Product'
 
 type CartItemListProps = {
   items: CartItemType[]
-  removeFromCart: (product: TProduct) => void
+  removeFromCart: (product: Product) => void
   loading?: boolean
 }
 

@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Input, Icon, Transition } from 'semantic-ui-react'
 import { useCartMutations } from '@store/Cart'
+import { Product } from '@classes/Product'
 
 type AddToCartProps = {
-  product: TProduct
+  product: Product
 }
 
 // Fake a server Response, we don't care on this project
