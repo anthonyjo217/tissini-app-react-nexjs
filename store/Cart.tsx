@@ -87,10 +87,42 @@ function cartReducers(
   }
 }
 
+const discount = (sum: number): number => {
+  let porcent = 0,
+    discount = 0,
+    numberDiscount = ''
+
+  if (sum > 50) {
+    console.log('descuento 15%')
+    // numberDiscount = '15%'
+    porcent = (sum * 15) / 100
+    sum = sum - porcent
+  }
+
+  if (sum > 100) {
+    console.log('descuento 30%')
+    //numberDiscount = '30%'
+    porcent = (sum * 30) / 100
+    sum = sum - porcent
+  }
+
+  if (sum > 150) {
+    console.log('descuento 40%')
+    //numberDiscount = '40%'
+    porcent = (sum * 40) / 100
+    sum = sum - porcent
+  }
+
+  discount = parseFloat(sum.toFixed(2))
+
+  return discount
+}
 const getCartSubTotal = (sum: number, item: CartItemType) => {
   sum += item.price * item.quantity
-  return sum
+
+  return discount(sum)
 }
+
 const getCartCount = (sum: number, item: CartItemType) => sum + item.quantity
 /**
  * Hey there insatiably brain,

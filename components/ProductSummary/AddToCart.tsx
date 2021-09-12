@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react'
-import { Input, Icon, Transition } from 'semantic-ui-react'
+import { Input, Icon, Transition, Card } from 'semantic-ui-react'
 import { useCartMutations } from '@store/Cart'
 import { Product } from '@classes/Product'
+import Link from 'next/link'
+import Image from 'next/image'
 
 type AddToCartProps = {
   product: Product
@@ -42,6 +44,8 @@ const AddToCart = ({ product }: AddToCartProps) => {
       setLoading(true)
       addToCartRequest()
         .then(() => {
+          //console.log('product quantity-->', product);
+
           addToCart(product, quantity)
           setLoading(false)
           setQuantity(quantity)
@@ -60,23 +64,36 @@ const AddToCart = ({ product }: AddToCartProps) => {
 
   return (
     <>
-      <Input
-        type="number"
-        placeholder="Quantity"
-        value={quantity}
-        min={1}
-        step={1}
-        error={!!error}
-        onChange={handleChange}
-        action={{
-          color: 'green',
-          content: 'Add to Cart',
-          icon: 'plus cart',
-          onClick: handleSubmit,
-          loading,
-          disabled: loading,
-        }}
-      />
+      {/* <Link key={product.id} href={`/product/${product.id}`} ></Link> */}
+      <Card>
+        <Image src={product.images[0].url} width={333} height={333} />
+        <Card.Content>
+          <Card.Header>{product.name}</Card.Header>
+          <Card.Meta style={{ color: 'dimgray' }}>{product.price}</Card.Meta>
+          <Card.Description>{product.reference}</Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <Input
+            size="mini"
+            type="number"
+            placeholder="Quantity"
+            value={quantity}
+            min={1}
+            step={1}
+            error={!!error}
+            onChange={handleChange}
+            action={{
+              color: 'green',
+              content: 'Add to Cart',
+              icon: 'plus cart',
+              onClick: handleSubmit,
+              loading,
+              disabled: loading,
+            }}
+          />
+        </Card.Content>
+      </Card>
+
       {error && (
         <div style={{ color: 'red', position: 'absolute' }}>{error}</div>
       )}

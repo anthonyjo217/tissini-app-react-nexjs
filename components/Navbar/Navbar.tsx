@@ -14,17 +14,17 @@ const Navbar = () => {
   return (
     <Menu size="huge" borderless pointing as="header">
       <Container text>
-        <Link href="/" passHref>
+        <Link href="/">
           <Menu.Item
             active={pathname === '/'}
             title="Inicio | Todos los productos"
           >
             <Avocado />
-            Avo Store
+            Tissini Store
           </Menu.Item>
         </Link>
         <Menu.Menu position="right">
-          <Link href="/cart" passHref>
+          <Link href="/cart">
             <Menu.Item active={pathname === '/cart'}>
               <ShoppingCartIcon cartCount={cartCount} name="Canasta" />
             </Menu.Item>

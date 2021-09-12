@@ -3,6 +3,7 @@ import { Segment, Button } from 'semantic-ui-react'
 
 type CartSummaryProps = {
   totalAmount: number
+  //totalDiscount:string
 }
 
 const CartSummary = ({ totalAmount }: CartSummaryProps) => {

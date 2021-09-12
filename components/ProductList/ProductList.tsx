@@ -3,6 +3,8 @@ import { Card } from 'semantic-ui-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Product } from '@classes/Product'
+import AddToCart from '@components/ProductSummary/AddToCart'
+import Layout from '@components/Layout/Layout'
 
 type ProductListProps = {
   products: Product[]
@@ -25,10 +27,19 @@ const mapProductsToCards = (products: Product[]) =>
     </Link>
   ))
 
+const mapProductsToCart = (products: Product[]) =>
+  products.map((product) => <AddToCart key={product.id} product={product} />)
+
 const ProductList = ({ products }: ProductListProps) => (
-  <Card.Group itemsPerRow={2} stackable>
-    {mapProductsToCards(products)}
-  </Card.Group>
+  <>
+    {/* <Card.Group itemsPerRow={2} stackable>
+      {mapProductsToCards(products)}
+    </Card.Group> */}
+
+    <Card.Group itemsPerRow={2} stackable>
+      {mapProductsToCart(products)}
+    </Card.Group>
+  </>
 )
 
 export default ProductList
