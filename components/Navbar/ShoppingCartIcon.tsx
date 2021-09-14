@@ -1,5 +1,6 @@
 import React from 'react'
 import { Basket } from '@components/SVGIcons'
+import { useCart } from '@store/Cart'
 
 type ShoppingCartIconProps = {
   cartCount: number
@@ -20,13 +21,15 @@ const ShoppingCartIcon = ({ cartCount, name }: ShoppingCartIconProps) => {
     }
     return `(${cartCount})`
   }
-
+  const { subTotal } = useCart()
   return (
     <div className="container">
       <Basket />
       <div className="text">
         {` ${name} `}
         {showCartCount()}
+
+        {'  Total:' + subTotal.toFixed(2)}
       </div>
       <style jsx>{`
         .container {

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Item, Button, Loader, Message } from 'semantic-ui-react'
-import { CartItemType } from '@store/Cart'
+import { CartItemType, discountByItem, useCart } from '@store/Cart'
 import { Product } from '@classes/Product'
 
 type CartItemListProps = {
@@ -28,6 +28,8 @@ const CartItemList = ({
       </Message>
     )
 
+  const { subTotal } = useCart()
+
   const mapCartItemsToItems = (items: CartItemType[]) =>
     items.map((cartItem) => {
       const { id, name, quantity, price, images, description } = cartItem
@@ -47,7 +49,10 @@ const CartItemList = ({
             style={{ background: '#f2f2f2' }}
           />
         ),
-        meta: `${quantity} x ${price}`,
+        meta: `${quantity} x ${discountByItem(price, subTotal).toLocaleString(
+          'en-US',
+          { maximumFractionDigits: 2 }
+        )}`,
         description: { description },
         extra: (
           <Button

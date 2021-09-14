@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Input, Icon, Transition, Card } from 'semantic-ui-react'
-import { useCartMutations } from '@store/Cart'
+import { useCart, useCartMutations, discountByItem } from '@store/Cart'
 import { Product } from '@classes/Product'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -23,7 +23,20 @@ const validate = (quantity: number) => {
   return error
 }
 
+const applyDiscount = (subTotal: number, price: number): String => {
+  let priceProductDiscount: number = price
+
+  if (subTotal > 50) {
+    priceProductDiscount = discountByItem(price, subTotal)
+  }
+
+  return priceProductDiscount.toLocaleString('en-US', {
+    maximumFractionDigits: 2,
+  })
+}
+
 const AddToCart = ({ product }: AddToCartProps) => {
+  const { subTotal } = useCart()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [quantity, setQuantity] = useState(1)
@@ -69,7 +82,9 @@ const AddToCart = ({ product }: AddToCartProps) => {
         <Image src={product.images[0].url} width={333} height={333} />
         <Card.Content>
           <Card.Header>{product.name}</Card.Header>
-          <Card.Meta style={{ color: 'dimgray' }}>{product.price}</Card.Meta>
+          <Card.Meta style={{ color: 'dimgray' }}>
+            {`$ ${applyDiscount(subTotal, product.price)}`}
+          </Card.Meta>
           <Card.Description>{product.reference}</Card.Description>
         </Card.Content>
         <Card.Content extra>

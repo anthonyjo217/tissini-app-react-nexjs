@@ -86,8 +86,37 @@ function cartReducers(
     }
   }
 }
+export const discountByItem = (price: number, total: number): number => {
+  let porcent = 0,
+    discount = 0,
+    numberDiscount = ''
 
-const discount = (sum: number): number => {
+  if (total > 50) {
+    console.log('descuento al item 15%')
+    // numberDiscount = '15%'
+    porcent = (price * 15) / 100
+    price = price - porcent
+  }
+
+  if (total > 100) {
+    console.log('descuento al item 30%')
+    //numberDiscount = '30%'
+    porcent = (price * 30) / 100
+    price = price - porcent
+  }
+
+  if (total > 150) {
+    console.log('descuento al item 40%')
+    //numberDiscount = '40%'
+    porcent = (price * 40) / 100
+    price = price - porcent
+  }
+
+  //discount = parseFloat(price.toFixed(2))
+  discount = price
+  return discount
+}
+export const discountTotal = (sum: number): number => {
   let porcent = 0,
     discount = 0,
     numberDiscount = ''
@@ -113,14 +142,15 @@ const discount = (sum: number): number => {
     sum = sum - porcent
   }
 
-  discount = parseFloat(sum.toFixed(2))
+  //discount = parseFloat(sum.toFixed(2))
+  discount = sum
 
   return discount
 }
+
 const getCartSubTotal = (sum: number, item: CartItemType) => {
   sum += item.price * item.quantity
-
-  return discount(sum)
+  return sum
 }
 
 const getCartCount = (sum: number, item: CartItemType) => sum + item.quantity
@@ -138,11 +168,14 @@ export const useCart = () => {
   const count = items.reduce(getCartCount, 0)
   const subTotal = items.reduce(getCartSubTotal, 0)
 
+  const SubtotalDiscount = discountTotal(subTotal)
+
   return {
     items,
     itemsById,
     count,
     subTotal,
+    SubtotalDiscount,
   }
 }
 export const useCartMutations = () => {

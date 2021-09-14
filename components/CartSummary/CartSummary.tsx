@@ -11,7 +11,7 @@ const CartSummary = ({ totalAmount }: CartSummaryProps) => {
     <Segment clearing size="large" as="section">
       <span>
         <strong>Sub total:</strong>
-        {` ${totalAmount}`}
+        {` ${totalAmount.toFixed(2)}`}
       </span>
       <Button color="black" floated="right">
         Check out
