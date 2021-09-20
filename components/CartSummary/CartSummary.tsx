@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Button } from 'semantic-ui-react'
+import { Segment, Button, Divider, Label } from 'semantic-ui-react'
 
 type CartSummaryProps = {
   totalAmount: number
@@ -15,15 +15,28 @@ const CartSummary = ({ totalAmount, totalDiscount }: CartSummaryProps) => {
           ? `${totalDiscount.toFixed(2)}`
           : `${totalAmount.toFixed(2)}`}
 
-        <br />
+        <Divider />
 
-        {totalDiscount > 50 &&
-          totalDiscount < 100 &&
-          ' Se aplico descuento de 15%'}
-        {totalDiscount > 100 &&
-          totalDiscount < 150 &&
-          'Se aplico descuento de 30%'}
-        {totalDiscount > 150 && ' Se aplico descuento de 40%'}
+        {totalAmount > 50 && totalAmount < 100 && (
+          <Label color="green" pointing prompt>
+            {' '}
+            Se aplico descuento de 15%{' '}
+          </Label>
+        )}
+
+        {totalAmount > 100 && totalAmount < 150 && (
+          <Label color="green" pointing prompt>
+            {' '}
+            Se aplico descuento de 30%{' '}
+          </Label>
+        )}
+
+        {totalAmount > 150 && (
+          <Label color="green" pointing prompt>
+            {' '}
+            Se aplico descuento de 40%{' '}
+          </Label>
+        )}
       </span>
       <Button color="black" floated="right">
         Check out
