@@ -1,5 +1,11 @@
 import { Product } from '@classes/Product'
-import React, { Dispatch, useContext, useReducer } from 'react'
+import React, {
+  Dispatch,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react'
 
 export type CartItemType = Product & { quantity: number }
 
@@ -92,21 +98,21 @@ export const discountByItem = (price: number, total: number): number => {
     numberDiscount = ''
 
   if (total > 50) {
-    console.log('descuento al item 15%')
+    //console.log('descuento al item 15%')
     // numberDiscount = '15%'
     porcent = (price * 15) / 100
     price = price - porcent
   }
 
   if (total > 100) {
-    console.log('descuento al item 30%')
+    //console.log('descuento al item 30%')
     //numberDiscount = '30%'
     porcent = (price * 30) / 100
     price = price - porcent
   }
 
   if (total > 150) {
-    console.log('descuento al item 40%')
+    //console.log('descuento al item 40%')
     //numberDiscount = '40%'
     porcent = (price * 40) / 100
     price = price - porcent
@@ -122,21 +128,21 @@ export const discountTotal = (sum: number): number => {
     numberDiscount = ''
 
   if (sum > 50) {
-    console.log('descuento 15%')
+    //console.log('descuento 15%')
     // numberDiscount = '15%'
     porcent = (sum * 15) / 100
     sum = sum - porcent
   }
 
   if (sum > 100) {
-    console.log('descuento 30%')
+    //console.log('descuento 30%')
     //numberDiscount = '30%'
     porcent = (sum * 30) / 100
     sum = sum - porcent
   }
 
   if (sum > 150) {
-    console.log('descuento 40%')
+    //console.log('descuento 40%')
     //numberDiscount = '40%'
     porcent = (sum * 40) / 100
     sum = sum - porcent
@@ -166,8 +172,8 @@ export const useCart = () => {
   // Not familiar with Array.reduce? :)
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
   const count = items.reduce(getCartCount, 0)
-  const subTotal = items.reduce(getCartSubTotal, 0)
 
+  const subTotal = items.reduce(getCartSubTotal, 0)
   const SubtotalDiscount = discountTotal(subTotal)
 
   return {
