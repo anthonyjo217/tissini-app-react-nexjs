@@ -6,7 +6,8 @@
       "@cors": ["cors-middleware.ts"],
       "@components/*": ["components/*"],
       "@store/*": ["store/*"],
-      "@classes/*": ["classes/*"]
+      "@classes/*": ["classes/*"],
+      "@hooks/*": ["hooks/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],

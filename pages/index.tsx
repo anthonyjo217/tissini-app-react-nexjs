@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
 import { GetServerSideProps } from 'next'
-import Layout from '@components/Layout/Layout'
-import KawaiiHeader from '@components/KawaiiHeader/KawaiiHeader'
-import ProductList from '@components/ProductList/ProductList'
 import { Product, TAPIProductResponse } from '@classes/Product'
+// import  { useFetch } from '@hooks/useFetch';
+import useSWR, { SWRConfig } from 'swr'
+import HomeProductList from '@components/HomeProductList/HomeProductList'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(`https://l8.tissini.dev/api/v3/categories/1/products`)
@@ -13,17 +13,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      productList,
+      fallback: {
+        '/': productList,
+      },
     },
   }
 }
 
-const HomePage = ({ productList }: { productList: Product[] }) => {
+const HomePage = ({ fallback }: any) => {
   return (
-    <Layout>
-      <KawaiiHeader />
-      {<ProductList products={productList} />}
-    </Layout>
+    <SWRConfig value={{ fallback }}>
+      <HomeProductList />
+    </SWRConfig>
   )
 }
 

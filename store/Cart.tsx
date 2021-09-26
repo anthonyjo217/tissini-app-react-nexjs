@@ -92,6 +92,7 @@ function cartReducers(
     }
   }
 }
+
 export const discountByItem = (price: number, total: number): number => {
   let porcent = 0,
     discount = 0,
