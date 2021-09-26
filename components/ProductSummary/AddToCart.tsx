@@ -11,7 +11,7 @@ type AddToCartProps = {
   product: Product
 }
 
-const AddToCart = ({ product }: AddToCartProps) => {
+const AddToCart = React.memo(({ product }: AddToCartProps) => {
   return (
     <>
       {/* <Link key={product.id} href={`/product/${product.id}`} ></Link> */}
@@ -34,6 +34,6 @@ const AddToCart = ({ product }: AddToCartProps) => {
       </Card>
     </>
   )
-}
+})
 
 export default AddToCart

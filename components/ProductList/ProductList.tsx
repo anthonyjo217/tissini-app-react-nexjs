@@ -30,7 +30,7 @@ const mapProductsToCards = (products: Product[]) =>
 const mapProductsToCart = (products: Product[]) =>
   products.map((product) => <AddToCart key={product.id} product={product} />)
 
-const ProductList = React.memo(({ products }: ProductListProps) => (
+const ProductList = ({ products }: ProductListProps) => (
   <>
     {/* <Card.Group itemsPerRow={2} stackable>
       {mapProductsToCards(products)}
@@ -40,6 +40,6 @@ const ProductList = React.memo(({ products }: ProductListProps) => (
       {mapProductsToCart(products)}
     </Card.Group>
   </>
-))
+)
 
 export default ProductList
