@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import fetch from 'isomorphic-unfetch'
 import { GetServerSideProps } from 'next'
 import { Product, TAPIProductResponse } from '@classes/Product'
 // import  { useFetch } from '@hooks/useFetch';
-import useSWR, { SWRConfig } from 'swr'
+//import useSWR, { SWRConfig } from 'swr'
 import HomeProductList from '@components/HomeProductList/HomeProductList'
+import { ProductListContext } from '@contexts/productList/ProductListContext'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(`https://l8.tissini.dev/api/v3/categories/1/products`)
@@ -13,19 +14,44 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      fallback: {
-        '/': productList,
-      },
+      productList,
     },
   }
 }
 
-const HomePage = ({ fallback }: any) => {
+const HomePage = ({ productList }: { productList: Product[] }) => {
   return (
-    <SWRConfig value={{ fallback }}>
+    <ProductListContext.Provider value={productList}>
       <HomeProductList />
-    </SWRConfig>
+    </ProductListContext.Provider>
   )
 }
 
 export default HomePage
+
+// swr
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const res = await fetch(`https://l8.tissini.dev/api/v3/categories/1/products`)
+//   //rename de data a productlisst tipo TAPIProductResponse
+//   const { products: productList }: TAPIProductResponse = await res.json()
+
+//   return {
+//     props: {
+//       fallback: {
+//         '/': productList,
+//       },
+//     },
+//   }
+// }
+
+// const HomePage = ({ fallback}: any) => {
+
+//   console.log( fallback );
+
+//   return (
+//     <SWRConfig value={{ fallback }}>
+//       <HomeProductList />
+//     </SWRConfig>
+//   )
+// }

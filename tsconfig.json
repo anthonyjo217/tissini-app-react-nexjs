@@ -7,7 +7,8 @@
       "@components/*": ["components/*"],
       "@store/*": ["store/*"],
       "@classes/*": ["classes/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@contexts/*": ["contexts/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
