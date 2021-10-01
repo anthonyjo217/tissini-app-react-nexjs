@@ -31,7 +31,15 @@ class MyDocument extends Document {
             type="image/png"
             sizes="32x32"
           />
-          <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+          <meta name="apple-mobile-web-app-title" content="Tissini" />
+          <link rel="apple-touch-icon" href="/icons/manifest-icon-192.png" />
+          <link
+            rel="apple-touch-startup-icon"
+            href="/icons/manifest-icon-192.png"
+          />
           <meta name="theme-color" content="#ffffff" />
           {/** scripts */}
         </Head>

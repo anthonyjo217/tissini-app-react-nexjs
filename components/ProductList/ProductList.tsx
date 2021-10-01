@@ -7,7 +7,7 @@ import { ProductListContext } from '@contexts/productList/ProductListContext'
 const mapProductsToCart = (products: Product[]) =>
   products.map((product) => <AddToCart key={product.id} product={product} />)
 
-const ProductList = () => {
+const ProductList = React.memo(() => {
   const productList = useContext(ProductListContext)
 
   return (
@@ -15,7 +15,7 @@ const ProductList = () => {
       {mapProductsToCart(productList)}
     </Card.Group>
   )
-}
+})
 
 export default ProductList
 

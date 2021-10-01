@@ -6,6 +6,8 @@ module.exports = withPWA({
   pwa: {
     dest: 'public',
     runtimeCaching,
+    //register: true,
+    //sw: 'service-worker.js',
   },
   async rewrites() {
     return [

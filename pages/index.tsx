@@ -19,13 +19,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-const HomePage = ({ productList }: { productList: Product[] }) => {
+const HomePage = React.memo(({ productList }: { productList: Product[] }) => {
   return (
     <ProductListContext.Provider value={productList}>
       <HomeProductList />
     </ProductListContext.Provider>
   )
-}
+})
 
 export default HomePage
 
